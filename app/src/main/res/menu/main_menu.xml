@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search_item"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search"
+        android:onClick="clickMenuItem" />
+
+    <item
+        android:id="@+id/add_item"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Add"
+        android:onClick="clickMenuItem" />
+
+    <item
+        android:id="@+id/revert_item"
+        app:showAsAction=""
+        android:icon="@android:drawable/ic_menu_revert"
+        android:title="Revert"
+        android:onClick="clickMenuItem" />
+
+    <item
+        android:id="@+id/delete_item"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="Delete"
+        android:onClick="clickMenuItem"/>
+
+    <item
+        android:id="@+id/share_item"
+        app:showAsAction=""
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="Share">
+
+        <menu>
+            <item
+                android:id="@+id/googleplus_item"
+                android:title="Google+"
+                android:onClick="clickMenuItem" />
+            <item
+                android:id="@+id/facebook_item"
+                android:title="Facebook"
+                android:onClick="clickMenuItem" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/about_item"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="About"
+        android:onClick="clickMenuItem"/>
+    <!-- 設定 -->
+    <item
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:onClick="clickPreferences"
+        android:title="Settings" />
+</menu>

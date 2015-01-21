@@ -1,0 +1,122 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ImageButton
+                android:id="@+id/imgbtn_camera"
+                android:layout_width="wrap_content"
+                android:contentDescription="@string/camera"
+                android:onClick="clickFunction"
+                android:src="@android:drawable/ic_menu_camera" />
+
+            <ImageButton
+                android:id="@+id/imgbtn_record"
+                android:layout_width="wrap_content"
+                android:contentDescription="@string/record"
+                android:onClick="clickFunction"
+                android:src="@android:drawable/ic_btn_speak_now" />
+
+            <ImageButton
+                android:id="@+id/imgbtn_location"
+                android:layout_width="wrap_content"
+                android:contentDescription="@string/location"
+                android:onClick="clickFunction"
+                android:src="@android:drawable/ic_menu_mylocation" />
+
+            <ImageButton
+
+                android:id="@+id/imgbtn_alarm"
+                android:layout_width="wrap_content"
+                android:contentDescription="@string/alarm"
+                android:onClick="clickFunction"
+                android:src="@android:drawable/ic_menu_recent_history" />
+
+            <ImageButton
+                android:id="@+id/imgbtn_color"
+                android:layout_width="wrap_content"
+                android:contentDescription="@string/color"
+                android:onClick="clickFunction"
+                android:src="@android:drawable/ic_menu_edit" />
+        </TableRow>
+
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/text_title"
+                    android:layout_span="2"
+                    android:hint="@string/enter_title" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <EditText
+                    android:id="@+id/text_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_span="2"
+                    android:ems="10"
+                    android:hint="@string/enter_content"
+                    android:inputType="textMultiLine"
+                    android:lines="10" />
+
+            </TableRow>
+            <TableRow>
+                <!-- 顯示圖片 -->
+                <ImageView
+                    android:id="@+id/picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2sp"
+                    android:padding="6sp"
+                    android:visibility="invisible" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onSubmit"
+                    android:text="@android:string/cancel" />
+
+                <Button
+                    android:id="@+id/btn_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onSubmit"
+                    android:text="@android:string/ok" />
+            </TableRow>
+        </TableLayout>
+
+    </TableLayout>
+</ScrollView>

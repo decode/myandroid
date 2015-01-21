@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView android:text="@string/about" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@android:string/ok"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:onClick="clickOk" />
+
+</LinearLayout>
