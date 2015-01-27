@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +29,8 @@
         </activity>
         <activity
             android:name=".ItemActivity"
-            android:label="@string/title_activity_item" >
+            android:label="@string/title_activity_item"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
 
                 <!-- 新增用的名稱 -->
@@ -38,6 +40,9 @@
                 <!-- 一定要加入，內容固定不變 -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
         </activity>
         <activity
             android:name=".ColorActivity"
@@ -73,8 +78,11 @@
         <receiver
             android:name=".AlarmReceiver"
             android:enabled="true"
-            android:exported="true"
-            android:process=":remote"/>
+            android:exported="true" />
+        <receiver
+            android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

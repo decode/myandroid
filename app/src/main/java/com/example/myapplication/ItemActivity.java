@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.text.ParseException;
@@ -241,10 +240,11 @@ public class ItemActivity extends ActionBarActivity {
             if (item.getAlarmTime() > 0) {
                 alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 Intent intent = new Intent(this, AlarmReceiver.class);
+                intent.putExtra("AlarmMessage", item.getTitle());
+                intent.putExtra("ItemID", item.getId());
                 operation = PendingIntent.getBroadcast(this, (int) item.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
                 alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, item.getAlarmTime(), operation);
-                Toast.makeText(this, "set alarm success", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(this, AlarmReceiver.class);
                 operation = PendingIntent.getBroadcast(this, (int) item.getId(), intent, 0);

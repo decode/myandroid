@@ -52,4 +52,11 @@
         <item>60</item>
     </string-array>
 
+    <string name="alarm_notification_title_template">提醒: %1$s</string>
+    <string name="alarm_notification_placeholder_text_template">%1$s</string>
+    <string name="action_share">Share</string>
+    <string name="action_reply">Reply</string>
+    <string name="action_dismiss">忽略</string>
+    <string name="action_view">查看</string>
+
 </resources>

@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 public class AlarmReceiver extends BroadcastReceiver {
     public AlarmReceiver() {
@@ -11,8 +10,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
-        Toast.makeText(context, "Notice", Toast.LENGTH_LONG).show();
+        // TODO: 弹出窗口或者通知
+        String msg = intent.getStringExtra("AlarmMessage");
+        Long id = intent.getLongExtra("ItemID", 0);
+//        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+        AlarmNotification.notify(context, id, msg, 1);
     }
 }
