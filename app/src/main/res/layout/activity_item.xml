@@ -47,6 +47,7 @@
                 android:contentDescription="@string/color"
                 android:onClick="clickFunction"
                 android:src="@android:drawable/ic_menu_edit" />
+
         </TableRow>
 
 
@@ -63,6 +64,7 @@
                     android:id="@+id/text_title"
                     android:layout_span="2"
                     android:hint="@string/enter_title" />
+
             </TableRow>
 
             <TableRow
@@ -80,6 +82,19 @@
                     android:lines="10" />
 
             </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/text_alarm"
+                    android:visibility="invisible"
+                    android:layout_span="2" />
+            </TableRow>
+
             <TableRow>
                 <!-- 顯示圖片 -->
                 <ImageView

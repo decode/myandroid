@@ -1,28 +1,35 @@
 package com.example.myapplication;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class ItemActivity extends ActionBarActivity {
 
     private EditText text_title, text_content;
+    private TextView text_alarm;
 
     // 啟動功能用的請求代碼
     private static final int START_CAMERA = 0;
@@ -36,6 +43,9 @@ public class ItemActivity extends ActionBarActivity {
 
     private String fileName;
     private ImageView picture;
+
+    private AlarmManager alarmManager;
+    private PendingIntent operation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +73,13 @@ public class ItemActivity extends ActionBarActivity {
     private void processViews() {
         text_title = (EditText) findViewById(R.id.text_title);
         text_content = (EditText) findViewById(R.id.text_content);
+        text_alarm = (TextView) findViewById(R.id.text_alarm);
 
         picture = (ImageView) findViewById(R.id.picture);
+
+//        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        Intent intent = new Intent(".AlarmReceiver");
+//        operation = PendingIntent.getBroadcast(this, (int) item.getId(),intent, 0);
     }
 
     @Override
@@ -84,6 +99,15 @@ public class ItemActivity extends ActionBarActivity {
                 FileUtil.fileToImageView(file.getAbsolutePath(), picture);
             }
         }
+
+        if (item.getAlarmTime() > 0) {
+            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            text_alarm.setText(date_format.format(new Date(item.getAlarmTime())));
+            text_alarm.setVisibility(View.VISIBLE);
+        } else {
+            text_alarm.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     @Override
@@ -131,8 +155,7 @@ public class ItemActivity extends ActionBarActivity {
                     // 詢問播放還是重新錄製的對話框
                     AlertDialog.Builder d = new AlertDialog.Builder(this);
 
-                    d.setTitle(R.string.title_record)
-                            .setCancelable(true);
+                    d.setTitle(R.string.title_record).setCancelable(true);
                     d.setPositiveButton(R.string.record_play,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -161,6 +184,7 @@ public class ItemActivity extends ActionBarActivity {
             case R.id.imgbtn_location:
                 break;
             case R.id.imgbtn_alarm:
+                startActivityForResult(new Intent(this, AlarmActivity.class), START_ALARM);
                 break;
             case R.id.imgbtn_color:
                 startActivityForResult(new Intent(this, ColorActivity.class), START_COLOR);
@@ -205,8 +229,7 @@ public class ItemActivity extends ActionBarActivity {
             else {
                 item.setDatetime(new Date().getTime());
                 // 建立SharedPreferences物件
-                SharedPreferences sharedPreferences =
-                        PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
                 // 讀取設定的預設顏色
                 int color = sharedPreferences.getInt("DEFAULT_COLOR", -1);
                 item.setColor(getColors(color));
@@ -214,6 +237,20 @@ public class ItemActivity extends ActionBarActivity {
 
             Intent result = getIntent();
             result.putExtra(".Item", item);
+
+            if (item.getAlarmTime() > 0) {
+                alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                Intent intent = new Intent(this, AlarmReceiver.class);
+                operation = PendingIntent.getBroadcast(this, (int) item.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, item.getAlarmTime(), operation);
+                Toast.makeText(this, "set alarm success", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, AlarmReceiver.class);
+                operation = PendingIntent.getBroadcast(this, (int) item.getId(), intent, 0);
+                alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.cancel(operation);
+            }
 
             setResult(Activity.RESULT_OK, result);
         }
@@ -233,6 +270,22 @@ public class ItemActivity extends ActionBarActivity {
                 case START_LOCATION:
                     break;
                 case START_ALARM:
+                    String picked_datetime = data.getStringExtra("pickedDatetime");
+                    if (picked_datetime == null || picked_datetime.length() == 0) {
+                        item.setAlarmTime(0);
+                        break;
+                    }
+                    picked_datetime = picked_datetime + ":00";
+
+                    SimpleDateFormat date_format;
+                    date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    try {
+                        Date d = date_format.parse(picked_datetime);
+                        item.setAlarmTime(d.getTime());
+                    } catch (ParseException e) {
+                        item.setAlarmTime(0);
+                        e.printStackTrace();
+                    }
                     break;
                 // 設定顏色
                 case START_COLOR:

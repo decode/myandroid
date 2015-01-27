@@ -20,6 +20,8 @@ public class Item implements Serializable {
     private long lastModify;
     private boolean selected;
 
+    private long alarmTime;
+
     public Item() {
         title = "";
         content = "";
@@ -28,7 +30,7 @@ public class Item implements Serializable {
 
     public Item(long id, long datetime, Colors color, String title,
                 String content, String fileName, double latitude, double longitude,
-                long lastModify) {
+                long lastModify, long alarmTime) {
         this.id = id;
         this.datetime = datetime;
         this.color = color;
@@ -38,6 +40,7 @@ public class Item implements Serializable {
         this.latitude = latitude;
         this.longitude = longitude;
         this.lastModify = lastModify;
+        this.alarmTime = alarmTime;
     }
 
     public long getId() {
@@ -133,5 +136,13 @@ public class Item implements Serializable {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public long getAlarmTime() {
+        return alarmTime;
+    }
+
+    public void setAlarmTime(long alarmTime) {
+        this.alarmTime = alarmTime;
     }
 }

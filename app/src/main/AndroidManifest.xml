@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication" >
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -42,9 +43,11 @@
             android:name=".ColorActivity"
             android:label="@string/title_activity_color"
             android:theme="@android:style/Theme.Dialog" >
+
             <!-- 加入設定元件啟動用的Action名稱 -->
             <intent-filter>
-                <action android:name=".CHOOSE_COLOR"/>
+                <action android:name=".CHOOSE_COLOR" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -55,13 +58,23 @@
         <!-- 錄音元件 -->
         <activity
             android:name=".RecordActivity"
-            android:theme="@android:style/Theme.Dialog"
-            android:label="@string/title_record" />
+            android:label="@string/title_record"
+            android:theme="@android:style/Theme.Dialog" />
         <!-- 播放控件 -->
         <activity
             android:name=".PlayActivity"
-            android:theme="@android:style/Theme.Dialog"
-            android:label="@string/title_record" />
+            android:label="@string/title_record"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".AlarmActivity"
+            android:label="@string/title_activity_alarm"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote"/>
     </application>
 
 </manifest>

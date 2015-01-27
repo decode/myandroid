@@ -28,6 +28,7 @@ public class ItemDAO {
     public static final String LATITUDE_COLUMN = "latitude";
     public static final String LONGITUDE_COLUMN = "longitude";
     public static final String LASTMODIFY_COLUMN = "lastmodify";
+    public static final String ALARMTIME_COLUMN = "alarmtime";
 
     // 使用上面宣告的變數建立表格的SQL指令
     public static final String CREATE_TABLE =
@@ -40,7 +41,8 @@ public class ItemDAO {
                     FILENAME_COLUMN + " TEXT, " +
                     LATITUDE_COLUMN + " REAL, " +
                     LONGITUDE_COLUMN + " REAL, " +
-                    LASTMODIFY_COLUMN + " INTEGER)";
+                    LASTMODIFY_COLUMN + " INTEGER, " +
+                    ALARMTIME_COLUMN + " INTEGER)";
 
     // 資料庫物件
     private SQLiteDatabase db;
@@ -70,6 +72,7 @@ public class ItemDAO {
         cv.put(LATITUDE_COLUMN, item.getLatitude());
         cv.put(LONGITUDE_COLUMN, item.getLongitude());
         cv.put(LASTMODIFY_COLUMN, item.getLastModify());
+        cv.put(ALARMTIME_COLUMN, item.getAlarmTime());
 
         // 新增一筆資料並取得編號
         // 第一個參數是表格名稱
@@ -98,6 +101,7 @@ public class ItemDAO {
         cv.put(LATITUDE_COLUMN, item.getLatitude());
         cv.put(LONGITUDE_COLUMN, item.getLongitude());
         cv.put(LASTMODIFY_COLUMN, item.getLastModify());
+        cv.put(ALARMTIME_COLUMN, item.getAlarmTime());
 
         // 設定修改資料的條件為編號
         // 格式為「欄位名稱＝資料」
@@ -118,8 +122,7 @@ public class ItemDAO {
     // 讀取所有記事資料
     public List<Item> getAll() {
         List<Item> result = new ArrayList<>();
-        Cursor cursor = db.query(
-                TABLE_NAME, null, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             result.add(getRecord(cursor));
@@ -136,8 +139,7 @@ public class ItemDAO {
         // 使用編號為查詢條件
         String where = KEY_ID + "=" + id;
         // 執行查詢
-        Cursor result = db.query(
-                TABLE_NAME, null, where, null, null, null, null, null);
+        Cursor result = db.query(TABLE_NAME, null, where, null, null, null, null, null);
 
         // 如果有查詢結果
         if (result.moveToFirst()) {
@@ -165,6 +167,7 @@ public class ItemDAO {
         result.setLatitude(cursor.getDouble(6));
         result.setLongitude(cursor.getDouble(7));
         result.setLastModify(cursor.getLong(8));
+        result.setAlarmTime(cursor.getLong(9));
 
         // 回傳結果
         return result;
@@ -184,10 +187,10 @@ public class ItemDAO {
 
     // 建立範例資料
     public void sample() {
-        Item item = new Item(0, new Date().getTime(), Colors.RED, "關於Android Tutorial的事情.", "Hello content", "", 0, 0, 0);
-        Item item2 = new Item(0, new Date().getTime(), Colors.BLUE, "一隻非常可愛的小狗狗!", "她的名字叫「大熱狗」，又叫\n作「奶嘴」，是一隻非常可愛\n的小狗。", "", 25.04719, 121.516981, 0);
-        Item item3 = new Item(0, new Date().getTime(), Colors.GREEN, "一首非常好聽的音樂！", "Hello content", "", 0, 0, 0);
-        Item item4 = new Item(0, new Date().getTime(), Colors.ORANGE, "儲存在資料庫的資料", "Hello content", "", 0, 0, 0);
+        Item item = new Item(0, new Date().getTime(), Colors.RED, "關於Android Tutorial的事情.", "Hello content", "", 0, 0, 0, 0);
+        Item item2 = new Item(0, new Date().getTime(), Colors.BLUE, "一隻非常可愛的小狗狗!", "她的名字叫「大熱狗」，又叫\n作「奶嘴」，是一隻非常可愛\n的小狗。", "", 25.04719, 121.516981, 0, 0);
+        Item item3 = new Item(0, new Date().getTime(), Colors.GREEN, "一首非常好聽的音樂！", "Hello content", "", 0, 0, 0, 0);
+        Item item4 = new Item(0, new Date().getTime(), Colors.ORANGE, "儲存在資料庫的資料", "Hello content", "", 0, 0, 0, 0);
 
         insert(item);
         insert(item2);
