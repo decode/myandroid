@@ -40,6 +40,7 @@
                 <!-- 一定要加入，內容固定不變 -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <!-- Notification -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
