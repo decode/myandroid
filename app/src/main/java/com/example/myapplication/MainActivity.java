@@ -97,6 +97,7 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        // 列表控件 显示项目
         item_list = (ListView)findViewById(R.id.item_list);
     }
 
@@ -219,10 +220,11 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section1);
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+//                mTitle = getString(R.string.title_section2);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+//                mTitle = getString(R.string.title_section3);
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
         }
     }
@@ -278,6 +280,7 @@ public class MainActivity extends ActionBarActivity
         int item_id = item.getItemId();
         switch(item_id) {
             case R.id.search_item:
+                // TODO: Add search function
                 break;
             case R.id.add_item:
                 Intent intent = new Intent(".ADD_ITEM");

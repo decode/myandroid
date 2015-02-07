@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -75,7 +76,6 @@
             android:name=".AlarmActivity"
             android:label="@string/title_activity_alarm"
             android:theme="@android:style/Theme.Dialog" />
-
         <receiver
             android:name=".AlarmReceiver"
             android:enabled="true"
@@ -84,6 +84,11 @@
             android:name=".NotificationReceiver"
             android:enabled="true"
             android:exported="true" />
+
+        <activity
+            android:name=".GeoActivity"
+            android:label="@string/title_activity_location"
+            android:theme="@android:style/Theme.Dialog" />
     </application>
 
 </manifest>

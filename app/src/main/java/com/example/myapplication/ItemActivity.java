@@ -28,7 +28,7 @@ import java.util.Date;
 public class ItemActivity extends ActionBarActivity {
 
     private EditText text_title, text_content;
-    private TextView text_alarm;
+    private TextView text_alarm, text_location;
 
     // 啟動功能用的請求代碼
     private static final int START_CAMERA = 0;
@@ -62,6 +62,7 @@ public class ItemActivity extends ActionBarActivity {
             // 接收與設定記事標題
             text_title.setText(item.getTitle());
             text_content.setText(item.getContent());
+            text_location.setText(String.valueOf(item.getLatitude()) + "," + String.valueOf(item.getLongitude()));
         }
         // 新增記事
         else {
@@ -73,6 +74,7 @@ public class ItemActivity extends ActionBarActivity {
         text_title = (EditText) findViewById(R.id.text_title);
         text_content = (EditText) findViewById(R.id.text_content);
         text_alarm = (TextView) findViewById(R.id.text_alarm);
+        text_location = (TextView) findViewById(R.id.text_location);
 
         picture = (ImageView) findViewById(R.id.picture);
 
@@ -181,6 +183,7 @@ public class ItemActivity extends ActionBarActivity {
                 }
                 break;
             case R.id.imgbtn_location:
+                startActivityForResult(new Intent(this, GeoActivity.class), START_LOCATION);
                 break;
             case R.id.imgbtn_alarm:
                 startActivityForResult(new Intent(this, AlarmActivity.class), START_ALARM);
@@ -268,6 +271,13 @@ public class ItemActivity extends ActionBarActivity {
                     item.setFileName(fileName);
                     break;
                 case START_LOCATION:
+                    String latitude = data.getStringExtra("geo_latitude");
+                    String longitude = data.getStringExtra("geo_longitude");
+                    if (latitude.length() > 0 && longitude.length() > 0) {
+                        text_location.setText(latitude + " " + longitude);
+                        item.setLatitude(Double.parseDouble(latitude));
+                        item.setLongitude(Double.parseDouble(longitude));
+                    }
                     break;
                 case START_ALARM:
                     String picked_datetime = data.getStringExtra("pickedDatetime");

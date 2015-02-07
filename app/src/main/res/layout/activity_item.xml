@@ -79,7 +79,8 @@
                     android:ems="10"
                     android:hint="@string/enter_content"
                     android:inputType="textMultiLine"
-                    android:lines="10" />
+                    android:lines="10"
+                    android:gravity="left|top" />
 
             </TableRow>
 
@@ -93,6 +94,18 @@
                     android:id="@+id/text_alarm"
                     android:visibility="invisible"
                     android:layout_span="2" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_location"
+                    android:layout_span="2" />
             </TableRow>
 
             <TableRow>
@@ -103,7 +116,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2sp"
                     android:padding="6sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:layout_span="2" />
             </TableRow>
 
         </TableLayout>
