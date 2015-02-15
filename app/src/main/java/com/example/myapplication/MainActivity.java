@@ -223,6 +223,9 @@ public class MainActivity extends ActionBarActivity
 //                mTitle = getString(R.string.title_section2);
                 break;
             case 3:
+                startActivity(new Intent(this, WebActivity.class));
+                break;
+            case 4:
 //                mTitle = getString(R.string.title_section3);
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
